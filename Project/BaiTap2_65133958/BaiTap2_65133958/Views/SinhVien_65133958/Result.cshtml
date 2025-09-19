@@ -1,0 +1,11 @@
+﻿@{
+    ViewBag.Title = "Kết quả đăng ký";
+}
+
+<h2>THÔNG TIN SINH VIÊN ĐÃ ĐĂNG KÝ</h2>
+
+<p>Mã sinh viên: @ViewBag.Id</p>
+<p>Họ tên: @ViewBag.Name</p>
+<p>Điểm: @ViewBag.Marks</p>
+
+@Html.ActionLink("Quay lại", (string)ViewBag.Source, "SinhVien_65133958")

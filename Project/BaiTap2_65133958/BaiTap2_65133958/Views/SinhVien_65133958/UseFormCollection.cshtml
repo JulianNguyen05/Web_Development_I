@@ -1,0 +1,13 @@
+﻿@{
+    ViewBag.Title = "Thông tin sinh viên";
+}
+
+<h2>THÔNG TIN SINH VIÊN</h2>
+
+@using (Html.BeginForm("UseFormCollection", "SinhVien_65133958", FormMethod.Post))
+{
+    <p>Mã sinh viên: <input type="text" name="id" /></p>
+    <p>Họ và tên: <input type="text" name="name" /></p>
+    <p>Điểm: <input type="text" name="marks" /></p>
+    <button type="submit" name="action" value="register">Đăng ký</button>
+}
