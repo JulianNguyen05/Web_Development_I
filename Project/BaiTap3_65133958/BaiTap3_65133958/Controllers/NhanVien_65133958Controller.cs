@@ -30,7 +30,7 @@ namespace BaiTap3_65133958.Controllers
             // Lưu thông tin nhân viên vào file emp.txt
             string fSave = Server.MapPath("/emp.txt");
             string[] emInfo =
-            {
+            {   
                 emp.EmpID,
                 emp.Name,
                 emp.BirthOfDate.ToShortDateString(),

@@ -7,7 +7,7 @@ namespace BaiTap3_65133958.Models
 {
     public class Emp_65133958Model
     {
-        public string EmpID { get; set; }
+        public string EmpID { get; set; }   
         public string Name { get; set; }
         public DateTime BirthOfDate { get; set; }
         public string Email { get; set; }

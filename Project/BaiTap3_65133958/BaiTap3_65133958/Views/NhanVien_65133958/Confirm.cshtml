@@ -1,14 +1,32 @@
 ﻿@{
-    ViewBag.Title = "Thông tin nhân viên";
+    ViewBag.Title = "Confirm";
 }
 
-<h2>Thông tin nhân viên đã đăng ký</h2>
-
-<p>Mã NV: @ViewBag.EmpID</p>
-<p>Họ tên: @ViewBag.Name</p>
-<p>Ngày sinh: @ViewBag.BirthOfDate</p>
-<p>Email: @ViewBag.Email</p>
-<p>Mật khẩu: @ViewBag.Password</p>
-<p>Đơn vị: @ViewBag.Department</p>
-<p>Ảnh đại diện:</p>
-<img src="@ViewBag.Avatar" width="150" height="150" />
+<div class="container mt-4">
+    <div class="card shadow-sm p-3" style="max-width: 500px; margin: auto; border: 1px solid #444;">
+        <h4 class="text-center mb-3" style="font-weight: bold; text-transform: uppercase;">
+            THÔNG TIN THÀNH VIÊN ĐÃ ĐĂNG KÝ
+        </h4>
+        <div class="row">
+            <div class="col-4 text-center">
+                <img src="@ViewBag.Avatar"
+                     alt="Avatar"
+                     class="img-thumbnail"
+                     style="width:100px; height:100px; object-fit:cover; border-radius:50%;" />
+            </div>
+            <div class="col-8">
+                <p><b>Mã nhân viên:</b> @ViewBag.EmpID</p>
+                <p><b>Họ tên:</b> @ViewBag.Name</p>
+                <p><b>Ngày sinh:</b> @string.Format("{0:dd/MM/yy}", ViewBag.BirthOfDate)</p>
+                <p><b>Email:</b> @ViewBag.Email</p>
+                <p><b>Mật khẩu:</b> @ViewBag.Password</p>
+                <p><b>Phòng ban:</b> @ViewBag.Department</p>
+            </div>
+        </div>
+        <div class="text-start mt-2">
+            <a href="@Url.Action("Index", "NhanVien_65133958")" style="color: purple; text-decoration: none;">
+                Quay lại
+            </a>
+        </div>
+    </div>
+</div>
