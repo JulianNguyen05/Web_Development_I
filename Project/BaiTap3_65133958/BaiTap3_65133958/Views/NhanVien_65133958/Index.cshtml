@@ -1,0 +1,22 @@
+﻿@model BaiTap3_65133958.Models.Emp_65133958Model
+@{
+    ViewBag.Title = "Đăng ký nhân viên";
+}
+
+<h2>Đăng ký nhân viên</h2>
+
+@using (Html.BeginForm("Index", "NhanVien_65133958", FormMethod.Post,
+        new { enctype = "multipart/form-data" }))
+{
+    <div>
+        Mã số NV: @Html.TextBoxFor(m => m.EmpID) <br />
+        Họ tên: @Html.TextBoxFor(m => m.Name) <br />
+        Ngày sinh: @Html.TextBoxFor(m => m.BirthOfDate, "{0:yyyy-MM-dd}",
+              new { type = "date" }) <br />
+        Email: @Html.TextBoxFor(m => m.Email) <br />
+        Mật khẩu: @Html.PasswordFor(m => m.Password) <br />
+        Đơn vị: @Html.TextBoxFor(m => m.Department) <br />
+        Ảnh đại diện: <input type="file" name="Avatar" /> <br /><br />
+        <input type="submit" value="Đăng ký" />
+    </div>
+}
