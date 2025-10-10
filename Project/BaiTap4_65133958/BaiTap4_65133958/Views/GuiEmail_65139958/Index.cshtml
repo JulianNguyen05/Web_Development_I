@@ -1,0 +1,69 @@
+﻿@model BaiTap4_65133958.Models.MailInfo
+@{
+    ViewBag.Title = "Gửi Email";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow-lg border-0 rounded-4">
+                <div class="card-header text-white text-center bg-primary rounded-top-4 py-3">
+                    <h4 class="mb-0">📧 CHỨC NĂNG GỬI EMAIL</h4>
+                </div>
+
+                <div class="card-body p-4">
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger mb-3" })
+
+                        <div class="mb-3">
+                            @Html.LabelFor(model => model.From, "Gửi từ email", new { @class = "form-label fw-semibold" })
+                            @Html.TextBoxFor(model => model.From, new { @class = "form-control", placeholder = "Nhập email gửi" })
+                            @Html.ValidationMessageFor(model => model.From, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="mb-3">
+                            @Html.LabelFor(model => model.Password, "Mật khẩu ứng dụng", new { @class = "form-label fw-semibold" })
+                            @Html.PasswordFor(model => model.Password, new { @class = "form-control", placeholder = "Nhập mật khẩu ứng dụng" })
+                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                            <small class="text-muted fst-italic">* Nếu dùng Gmail, hãy dùng <b>App Password</b> thay vì mật khẩu thật.</small>
+                        </div>
+
+                        <div class="mb-3">
+                            @Html.LabelFor(model => model.To, "Gửi đến", new { @class = "form-label fw-semibold" })
+                            @Html.TextBoxFor(model => model.To, new { @class = "form-control", placeholder = "Nhập email người nhận" })
+                            @Html.ValidationMessageFor(model => model.To, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="mb-3">
+                            @Html.LabelFor(model => model.Subject, "Tiêu đề", new { @class = "form-label fw-semibold" })
+                            @Html.TextBoxFor(model => model.Subject, new { @class = "form-control", placeholder = "Nhập tiêu đề email" })
+                            @Html.ValidationMessageFor(model => model.Subject, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="mb-3">
+                            @Html.LabelFor(model => model.Body, "Nội dung", new { @class = "form-label fw-semibold" })
+                            @Html.TextAreaFor(model => model.Body, 5, 40, new { @class = "form-control", placeholder = "Nhập nội dung email..." })
+                            @Html.ValidationMessageFor(model => model.Body, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="d-grid gap-2 mt-4">
+                            <button type="submit" class="btn btn-success btn-lg shadow-sm">
+                                <i class="bi bi-send-fill me-2"></i> Gửi Email
+                            </button>
+                            <a href="@Url.Action("Index", "Home")" class="btn btn-outline-secondary">
+                                ← Quay lại
+                            </a>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
