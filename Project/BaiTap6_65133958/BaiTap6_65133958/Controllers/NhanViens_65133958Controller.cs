@@ -14,7 +14,7 @@ namespace BaiTap6_65133958.Controllers
     {
         private QLNV_65133958Entities1 db = new QLNV_65133958Entities1();
 
-        // GET: NhanViens_65133958
+        // GET: NhanViens_65133958/GioiThieu
         public ActionResult GioiThieu()
         {
             return View();
@@ -25,7 +25,7 @@ namespace BaiTap6_65133958.Controllers
 
 
 
-
+        // GET: NhanViens_65133958
         public ActionResult Index()
         {
             var nhanViens = db.NhanViens.Include(n => n.PhongBan);
