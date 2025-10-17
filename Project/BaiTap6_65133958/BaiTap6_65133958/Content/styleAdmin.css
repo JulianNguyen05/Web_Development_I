@@ -28,17 +28,17 @@
     height: 80%;
 }
 
-.a {
+a {
     text-decoration: none;
 }
 
-    .a:focus {
+    a:focus {
         outline: none;
         text-decoration: none;
     }
 
-    .a:active,
-    .a:hover {
+    a:active,
+    a:hover {
         background-color: #00F;
         color: #FFF;
         font-weight: bold;
