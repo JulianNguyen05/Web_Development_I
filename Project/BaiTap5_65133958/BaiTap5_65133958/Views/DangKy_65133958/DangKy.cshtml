@@ -1,0 +1,80 @@
+﻿@model BaiTap5_65133958.Models.DangKy
+
+@{
+    ViewBag.Title = "Đăng ký tài khoản nhân viên";
+    Layout = "~/Views/Shared/_LayoutAdmin_65133958.cshtml";
+}
+
+<div class="container mt-4">
+    <h2 class="text-center mb-4 text-primary">Đăng ký nhân viên mới</h2>
+
+    @using (Html.BeginForm("DangKy", "DangKy_65133958", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="card shadow-lg p-4 rounded-4">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger mb-3" })
+
+            <div class="mb-3 row">
+                @Html.LabelFor(model => model.idNV, "Mã nhân viên", htmlAttributes: new { @class = "col-md-2 col-form-label" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.idNV, new { htmlAttributes = new { @class = "form-control", placeholder = "Nhập mã nhân viên" } })
+                    @Html.ValidationMessageFor(model => model.idNV, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="mb-3 row">
+                @Html.LabelFor(model => model.nameNV, "Họ và tên", htmlAttributes: new { @class = "col-md-2 col-form-label" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.nameNV, new { htmlAttributes = new { @class = "form-control", placeholder = "Nhập họ và tên" } })
+                    @Html.ValidationMessageFor(model => model.nameNV, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="mb-3 row">
+                @Html.LabelFor(model => model.bodNV, "Ngày sinh", htmlAttributes: new { @class = "col-md-2 col-form-label" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.bodNV, new { htmlAttributes = new { @class = "form-control", type = "date" } })
+                    @Html.ValidationMessageFor(model => model.bodNV, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="mb-3 row">
+                @Html.LabelFor(model => model.emailNV, "Email", htmlAttributes: new { @class = "col-md-2 col-form-label" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.emailNV, new { htmlAttributes = new { @class = "form-control", placeholder = "example@gmail.com", type = "email" } })
+                    @Html.ValidationMessageFor(model => model.emailNV, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="mb-3 row">
+                @Html.LabelFor(model => model.mkNV, "Mật khẩu", htmlAttributes: new { @class = "col-md-2 col-form-label" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.mkNV, new { htmlAttributes = new { @class = "form-control", type = "password", placeholder = "Nhập mật khẩu" } })
+                    @Html.ValidationMessageFor(model => model.mkNV, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="mb-3 row">
+                @Html.LabelFor(model => model.donViNV, "Đơn vị công tác", htmlAttributes: new { @class = "col-md-2 col-form-label" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.donViNV, new { htmlAttributes = new { @class = "form-control", placeholder = "Nhập đơn vị" } })
+                    @Html.ValidationMessageFor(model => model.donViNV, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="mb-3 row">
+                @Html.LabelFor(model => model.avatarNV, "Ảnh đại diện", htmlAttributes: new { @class = "col-md-2 col-form-label" })
+                <div class="col-md-10">
+                    <input type="file" name="avatarNV" class="form-control" />
+                    @Html.ValidationMessageFor(model => model.avatarNV, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="text-center mt-4">
+                <input type="submit" value="Đăng ký" class="btn btn-primary px-4 py-2 rounded-3" />
+                @Html.ActionLink("Quay lại danh sách", "Index", null, new { @class = "btn btn-outline-secondary ms-2 px-4 py-2 rounded-3" })
+            </div>
+        </div>
+    }
+</div>
