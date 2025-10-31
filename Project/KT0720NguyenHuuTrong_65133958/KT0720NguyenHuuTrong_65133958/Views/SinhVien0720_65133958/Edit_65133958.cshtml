@@ -1,0 +1,160 @@
+﻿@model KT0720NguyenHuuTrong_65133958.Models.SINHVIEN
+
+@{
+    ViewBag.Title = "Thông tin chi tiết";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<style>
+    /* KHỐI CSS CỦA page-local-nav ĐÃ ĐƯỢC XÓA */
+
+    /* Thẻ thông tin chi tiết */
+    .details-card {
+        background: #ffffff;
+        border-radius: 12px;
+        box-shadow: var(--shadow);
+        padding: 30px;
+        border-top: 5px solid var(--primary);
+        max-width: 900px;
+        margin: 20px auto; /* SỬA LẠI: Thêm margin-top để không dính vào topbar */
+    }
+
+        .details-card h2 {
+            text-align: center;
+            color: var(--bg-dark);
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+    /* Layout 2 cột: Ảnh và Thông tin */
+    .details-layout {
+        display: grid;
+        grid-template-columns: 200px 1fr; /* Cột icon 200px, còn lại là thông tin */
+        gap: 40px;
+        align-items: center;
+    }
+
+    /* Cột icon bên trái */
+    .profile-icon {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        background: #f1f3f5;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 5px solid #e0e0e0;
+    }
+
+        .profile-icon i {
+            font-size: 120px;
+            color: #adb5bd;
+        }
+
+    /* Hiển thị ảnh thật (nếu có) thay cho icon */
+    .profile-image {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        object-fit: cover; /* Đảm bảo ảnh vừa vặn */
+        border: 5px solid #e0e0e0;
+    }
+
+    /* Cột thông tin bên phải */
+    .info-list {
+        display: grid;
+        /* Nhãn (auto) | Giá trị (1fr) */
+        grid-template-columns: auto 1fr;
+        gap: 18px;
+    }
+
+    .info-label {
+        font-weight: 700;
+        color: #333;
+        font-size: 1.1rem;
+        text-align: right; /* Giống trong hình */
+    }
+
+        .info-label::after {
+            content: ":";
+        }
+
+    .info-value {
+        font-weight: 500;
+        color: #222;
+        font-size: 1.1rem;
+        padding-left: 10px;
+    }
+
+    /* Link Quay lại */
+    .action-links {
+        margin-top: 30px;
+        text-align: center;
+    }
+
+    .btn-action-back {
+        background: #6c757d;
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+        .btn-action-back:hover {
+            background: #5a6268;
+        }
+</style>
+
+<div class="details-card">
+    <h2>THÔNG TIN CHI TIẾT</h2>
+
+    <div class="details-layout">
+        <div class="profile-icon-wrapper">
+            @if (string.IsNullOrEmpty(Model.AnhSV))
+            {
+                <div class="profile-icon">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+            }
+            else
+            {
+                <img src="@Url.Content("~/Uploads/Images/" + Model.AnhSV)" alt="Ảnh sinh viên" class="profile-image" />
+            }
+        </div>
+
+        <div class="info-list">
+            <span class="info-label">Mã sinh viên</span>
+            <span class="info-value">@Html.DisplayFor(model => model.MaSV)</span>
+
+            <span class="info-label">Họ sinh viên</span>
+            <span class="info-value">@Html.DisplayFor(model => model.HoSV)</span>
+
+            <span class="info-label">Tên sinh viên</span>
+            <span class="info-value">@Html.DisplayFor(model => model.TenSV)</span>
+
+            <span class="info-label">Giới tính</span>
+            <span class="info-value">
+                @(Model.GioiTinh == true ? "Nam" : "Nữ")
+            </span>
+
+            <span class="info-label">Ngày sinh</span>
+            <span class="info-value">
+                @(Model.NgaySinh.HasValue ? Model.NgaySinh.Value.ToString("dd/MM/yyyy") : "")
+            </span>
+
+            <span class="info-label">Địa chỉ</span>
+            <span class="info-value">@Html.DisplayFor(model => model.DiaChi)</span>
+
+            <span class="info-label">Phòng ban</span>
+            <span class="info-value">
+                @* Đây là lý do phải .Include(s => s.LOP) trong Controller *@
+                @Html.DisplayFor(model => model.LOP.TenLop)
+            </span>
+        </div>
+    </div>
+
+    <div class="action-links">
+        @Html.ActionLink("Quay lại Danh sách", "Index_65133958", null, new { @class = "btn-action-back" })
+    </div>
+</div>

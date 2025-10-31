@@ -1,0 +1,107 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Trang Quản Trị</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <link href="~/Content/admin-style.css" rel="stylesheet" />
+
+    <style>
+        /* 1. Ép nội dung chính chiếm 100% chiều rộng */
+        .main-content {
+            left: 0 !important;
+            width: 100% !important;
+        }
+
+        /* 2. Sửa lại layout của topbar */
+        .topbar {
+            justify-content: flex-start; /* Không dùng space-between nữa */
+            gap: 20px;
+        }
+
+        /* 3. Style cho menu nav mới trên topbar */
+        .top-nav {
+            display: flex;
+            height: 100%;
+        }
+
+            .top-nav a {
+                display: flex;
+                align-items: center;
+                padding: 0 15px;
+                font-size: 1rem;
+                font-weight: 500;
+                color: #555;
+                text-decoration: none;
+                border-bottom: 3px solid transparent;
+                transition: all 0.3s ease;
+            }
+
+                .top-nav a:hover {
+                    color: var(--primary); /* Dùng biến màu từ CSS cũ */
+                }
+
+                .top-nav a.active {
+                    color: var(--primary);
+                    border-bottom: 3px solid var(--primary);
+                }
+
+        /* 4. KHỐI CSS CỦA .search-box VÀ .search-submit-btn ĐÃ ĐƯỢC XÓA */
+    </style>
+</head>
+<body>
+    @{
+        // Các biến này để xác định trang hiện tại và tô sáng link
+        var currentController = ViewContext.RouteData.Values["controller"].ToString();
+        var currentAction = ViewContext.RouteData.Values["action"].ToString();
+    }
+
+    <section class="main-content">
+        <header class="topbar">
+
+            @* --- ĐÃ SẮP XẾP LẠI THỨ TỰ VÀ SỬA LỖI LINK TÌM KIẾM --- *@
+            <nav class="top-nav">
+                @* 1. DANH SÁCH *@
+                <a href="@Url.Action("Index_65133958", "HOCVIENs_65133958")"
+                   class="@(currentAction == "Index_65133958" ? "active" : "")">
+                    Danh sách
+                </a>
+
+                @* 2. TÌM KIẾM (SỬA LỖI HREF TẠI ĐÂY) *@
+                <a href="@Url.Action("TimKiemHV_65133958", "HOCVIENs_65133958")"
+                   class="@(currentAction == "TimKiemHV_65133958" ? "active" : "")">
+                    Tìm kiếm
+                </a>
+
+                @* 3. THÊM MỚI *@
+                <a href="@Url.Action("Create_65133958", "HOCVIENs_65133958")"
+                   class="@(currentAction == "Create_65133958" ? "active" : "")">
+                    Thêm mới
+                </a>
+
+                @* 4. GIỚI THIỆU *@
+                <a href="@Url.Action("GioiThieu_65133958", "HOCVIENs_65133958")"
+                   class="@(currentAction == "GioiThieu_65133958" ? "active" : "")">
+                    Giới thiệu
+                </a>
+            </nav>
+
+        </header>
+
+        <main class="content-wrapper">
+            @RenderBody()
+        </main>
+
+        <footer class="footer">
+            <p>&copy; @DateTime.Now.Year - Thi giữa kỳ</p>
+        </footer>
+    </section>
+
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,48 @@
+﻿@model BaiTap5_65133958.Models.EmpModel
+
+@{
+    ViewBag.Title = "Đăng ký thành viên";
+    Layout = "~/Views/Shared/_LayoutAdmin_65133958.cshtml";
+}
+
+<h3>THÔNG TIN THÀNH VIÊN ĐĂNG KÝ</h3>
+
+@using (Html.BeginForm("Register", "Home_65133958", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <table cellpadding="5">
+        <tr>
+            <td>Mã số nhân viên:</td>
+            <td>@Html.TextBoxFor(m => m.EmpID)</td>
+        </tr>
+        <tr>
+            <td>Họ tên:</td>
+            <td>@Html.TextBoxFor(m => m.Name)</td>
+        </tr>
+        <tr>
+            <td>Ngày sinh:</td>
+            <td>@Html.TextBoxFor(m => m.BirthOfDate, "{0:yyyy-MM-dd}", new { type = "date" })</td>
+        </tr>
+        <tr>
+            <td>Email:</td>
+            <td>@Html.TextBoxFor(m => m.Email)</td>
+        </tr>
+        <tr>
+            <td>Mật khẩu:</td>
+            <td>@Html.PasswordFor(m => m.Password)</td>
+        </tr>
+        <tr>
+            <td>Đơn vị:</td>
+            <td>@Html.TextBoxFor(m => m.Department)</td>
+        </tr>
+        <tr>
+            <td>Ảnh đại diện:</td>
+            <td>
+                <input type="file" name="Avatar" required />
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Đăng ký" /></td>
+        </tr>
+    </table>
+}

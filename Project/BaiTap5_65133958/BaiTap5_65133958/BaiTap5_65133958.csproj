@@ -120,15 +120,12 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\DangKy_65133958Controller.cs" />
-    <Compile Include="Controllers\GuiEmail_65133958Controller.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ThayDoiLayout_65133958Controller.cs" />
-    <Compile Include="Controllers\TrangChu_65133958Controller.cs" />
+    <Compile Include="Controllers\Home_65133958Controller.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\DangKy.cs" />
+    <Compile Include="Models\EmpModel.cs" />
+    <Compile Include="Models\MailInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -186,15 +183,14 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_LayoutAdmin_65133958.cshtml" />
-    <Content Include="Views\TrangChu_65133958\TrangChu.cshtml" />
-    <Content Include="Views\ThayDoiLayout_65133958\ChangeBanner.cshtml" />
-    <Content Include="Views\DangKy_65133958\DangKy.cshtml" />
-    <Content Include="Views\DangKy_65133958\Confirm.cshtml" />
+    <Content Include="Views\Home_65133958\Register.cshtml" />
+    <Content Include="Views\Home_65133958\Confirm.cshtml" />
+    <Content Include="Views\Home_65133958\SendMail.cshtml" />
+    <Content Include="Views\Home_65133958\ChangeBanner.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Images\" />
-    <Folder Include="Views\GuiEmail_65133958\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />

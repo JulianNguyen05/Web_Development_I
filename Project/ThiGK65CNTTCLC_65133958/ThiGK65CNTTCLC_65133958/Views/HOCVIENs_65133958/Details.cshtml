@@ -1,0 +1,75 @@
+﻿@model ThiGK65CNTTCLC_65133958.Models.HOCVIEN
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>HOCVIEN</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.HoHV)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HoHV)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TenHV)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenHV)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NgaySinh)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgaySinh)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GioiTinh)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GioiTinh)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AnhSV)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AnhSV)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DiaChi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DiaChi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DOITUONG.TenDoiTuong)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DOITUONG.TenDoiTuong)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.MaHV }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

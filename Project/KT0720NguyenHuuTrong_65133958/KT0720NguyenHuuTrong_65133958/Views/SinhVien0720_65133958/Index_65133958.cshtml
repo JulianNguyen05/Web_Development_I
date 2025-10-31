@@ -1,0 +1,220 @@
+﻿@* 1. Đổi model thành IPagedList *@
+@model PagedList.IPagedList<KT0720NguyenHuuTrong_65133958.Models.SINHVIEN>
+@* 2. Thêm using cho PagedList *@
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Danh sách Sinh viên";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+
+    // Biến đếm STT, bắt đầu từ số thứ tự của mục đầu tiên trên trang
+    int stt = Model.FirstItemOnPage;
+}
+
+<style>
+    /* Bọc bảng */
+    .table-wrapper {
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: var(--shadow);
+        padding: 25px;
+        overflow-x: auto; /* Cho phép cuộn ngang trên mobile */
+        margin: 20px auto; /* Thêm margin để không dính topbar */
+    }
+
+    .table-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+        .table-header h2 {
+            margin: 0;
+            color: var(--bg-dark);
+        }
+
+    /* Nút Thêm Mới */
+    .btn-create {
+        background: var(--primary);
+        color: #fff;
+        padding: 10px 18px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 500;
+        transition: background 0.3s ease;
+    }
+
+        .btn-create:hover {
+            background: var(--primary-hover);
+            color: #fff;
+        }
+
+        .btn-create i {
+            margin-right: 8px;
+        }
+
+    /* Bảng */
+    .styled-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.95rem;
+    }
+
+        .styled-table thead th {
+            background: #f5f7fa;
+            color: #555;
+            font-weight: 600;
+            text-align: left;
+            padding: 15px 12px;
+            border-bottom: 2px solid #eee;
+        }
+
+        .styled-table tbody tr {
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+            .styled-table tbody tr:last-child {
+                border-bottom: none;
+            }
+
+        .styled-table tbody td {
+            padding: 15px 12px;
+            vertical-align: middle;
+        }
+
+    /* Nút chức năng trong bảng */
+    .btn-details {
+        background: #28a745;
+        color: #fff;
+        padding: 6px 12px;
+        border-radius: 6px;
+        text-decoration: none;
+        font-size: 0.9rem;
+    }
+
+        .btn-details:hover {
+            background: #218838;
+            color: #fff;
+        }
+
+    /* 4. CSS cho thanh phân trang */
+    .pagination-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 25px;
+    }
+
+        .pagination-container .pagination {
+            display: flex;
+            list-style: none;
+            padding: 0;
+        }
+
+            .pagination-container .pagination li {
+                margin: 0 3px;
+            }
+
+                .pagination-container .pagination li a,
+                .pagination-container .pagination li span {
+                    display: block;
+                    padding: 8px 14px;
+                    border: 1px solid #ddd;
+                    border-radius: 6px;
+                    color: var(--primary);
+                    text-decoration: none;
+                    transition: all 0.3s ease;
+                }
+
+                    .pagination-container .pagination li a:hover {
+                        background: #f5f7fa;
+                    }
+
+                .pagination-container .pagination li.active span {
+                    background: var(--primary);
+                    color: #fff;
+                    border-color: var(--primary);
+                }
+
+                .pagination-container .pagination li.disabled span {
+                    color: #aaa;
+                    background: #f9f9f9;
+                }
+</style>
+
+<div class="table-wrapper">
+    <div class="table-header">
+        <h2>Danh sách Sinh viên</h2>
+        @Html.ActionLink("Thêm mới Sinh viên", "Create_65133958", null, new { @class = "btn-create" })
+    </div>
+
+    <table class="styled-table">
+        <thead>
+            <tr>
+                <th>STT</th>
+                <th>Mã sinh viên</th>
+                <th>Họ sinh viên</th>
+                <th>Tên sinh viên</th>
+                <th>Giới tính</th>
+                <th>Ngày sinh</th>
+                <th>Ảnh SV</th>
+                <th>Địa chỉ</th>
+                <th>Tên lớp</th>
+                <th>Chức năng</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@(stt++)</td>
+                    <td>@Html.DisplayFor(modelItem => item.MaSV)</td>
+                    <td>@Html.DisplayFor(modelItem => item.HoSV)</td>
+                    <td>@Html.DisplayFor(modelItem => item.TenSV)</td>
+                    <td>
+                        @if (item.GioiTinh == true)
+                        {
+                            <span>Nam</span>
+                        }
+                        else
+                        {
+                            <span>Nữ</span>
+                        }
+                    </td>
+                    <td>
+                        @(item.NgaySinh.HasValue ? item.NgaySinh.Value.ToString("dd/MM/yyyy") : "")
+                    </td>
+
+                    <td>
+                        @if (!string.IsNullOrEmpty(item.AnhSV))
+                        {
+                            <img src="@Url.Content("~/Uploads/Images/" + item.AnhSV)"
+                                 alt="Ảnh SV"
+                                 style="width: 100px; height: auto; border-radius: 8px; object-fit: cover;" />
+                        }
+                        else
+                        {
+                            <span>(Không có ảnh)</span>
+                        }
+                    </td>
+                    <td>@Html.DisplayFor(modelItem => item.DiaChi)</td>
+                    <td>@Html.DisplayFor(modelItem => item.LOP.TenLop)</td>
+                    <td>
+                        @Html.ActionLink("Xem chi tiết", "Edit_65133958", new { id = item.MaSV }, new { @class = "btn-details" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="pagination-container">
+        @Html.PagedListPager(Model, page => Url.Action("Index_65133958", "SinhVien0720_65133958", new { page }),
+            new PagedListRenderOptions
+            {
+                LiElementClasses = new[] { "page-item" },
+                DisplayPageCountAndCurrentLocation = false,
+                DisplayEllipsesWhenNotShowingAllPageNumbers = false
+            })
+    </div>
+</div>

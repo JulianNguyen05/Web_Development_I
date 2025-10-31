@@ -1,0 +1,100 @@
+﻿@{
+    ViewBag.Title = "Giới Thiệu";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    string hoTenHV = "Nguyễn Hữu Trọng";
+    string maHV = "65133958";
+    string lop = "65.CNTT-CLC";
+    string hocPhan = "Lập trình Web 1";
+}
+
+<style>
+    .info-card {
+        background: #ffffff;
+        border-radius: 12px;
+        box-shadow: var(--shadow);
+        padding: 30px;
+        max-width: 700px;
+        margin: 20px auto;
+        border-top: 5px solid var(--primary);
+    }
+
+        .info-card h2 {
+            text-align: center;
+            color: var(--bg-dark);
+            margin-bottom: 30px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+    .info-row {
+        display: flex;
+        align-items: center;
+        margin-bottom: 18px;
+        font-size: 1.05rem;
+    }
+
+    .info-label {
+        font-weight: 600;
+        color: #555;
+        width: 150px;
+        flex-shrink: 0;
+    }
+
+    .info-value {
+        font-weight: 500;
+        color: #222;
+        background: #f5f7fa;
+        padding: 8px 12px;
+        border-radius: 6px;
+        flex-grow: 1;
+    }
+
+    .btn-back {
+        color: var(--primary);
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+        .btn-back:hover {
+            text-decoration: underline;
+        }
+</style>
+
+<div class="info-card">
+    <h2>THÔNG TIN SINH VIÊN DỰ THI</h2>
+
+    <div class="info-row">
+        <span class="info-label">Mã số SV:</span>
+        <span class="info-value">@maHV</span>
+    </div>
+
+    <div class="info-row">
+        <span class="info-label">Họ và tên:</span>
+        <span class="info-value">@hoTenHV</span>
+    </div>
+
+    <div class="info-row">
+        <span class="info-label">Lớp:</span>
+        <span class="info-value">@lop</span>
+    </div>
+
+    <div class="info-row">
+        <span class="info-label">Ngày thi:</span>
+        <span class="info-value">@DateTime.Now.ToString("dd/MM/yyyy")</span>
+    </div>
+
+    <div class="info-row">
+        <span class="info-label">Học phần:</span>
+        <span class="info-value">@hocPhan</span>
+    </div>
+</div>
+
+<div style="margin-top: 25px; text-align: center;">
+    @Html.ActionLink(
+        "Về trang Tìm kiếm",
+        "TimKiemHV_65133958",
+"HOCVIENs_65133958", 
+null,
+new { @class = "btn-back" }
+)
+</div>

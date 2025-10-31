@@ -1,0 +1,81 @@
+﻿@{
+    ViewBag.Title = "Giới Thiệu";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+
+    // Lấy thông tin sinh viên dự kiểm tra
+    // Tên này được lấy từ namespace trong code controller bạn gửi
+    string hoTenSV = "Nguyễn Hữu Trọng";
+    string maSV = "65133958";
+    string lop = "CNTT K65"; // Bạn có thể thay đổi lớp này
+}
+
+<style>
+    /* KHỐI CSS của .page-local-nav ĐÃ ĐƯỢC XÓA */
+
+    /* Thẻ thông tin sinh viên */
+    .info-card {
+        background: #ffffff;
+        border-radius: 12px;
+        box-shadow: var(--shadow);
+        padding: 30px;
+        max-width: 700px;
+        margin: 20px auto; /* Căn giữa thẻ và thêm khoảng cách với topbar */
+        border-top: 5px solid var(--primary);
+    }
+
+        .info-card h2 {
+            text-align: center;
+            color: var(--bg-dark); /* Dùng biến màu từ _LayoutAdmin.css */
+            margin-bottom: 30px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+    /* Mỗi dòng thông tin */
+    .info-row {
+        display: flex;
+        align-items: center;
+        margin-bottom: 18px;
+        font-size: 1.05rem;
+    }
+
+    .info-label {
+        font-weight: 600;
+        color: #555;
+        width: 150px; /* Cố định chiều rộng nhãn */
+        flex-shrink: 0; /* Không cho nhãn bị co lại */
+    }
+
+    .info-value {
+        font-weight: 500;
+        color: #222;
+        background: #f5f7fa; /* Dùng màu nền light từ _LayoutAdmin.css */
+        padding: 8px 12px;
+        border-radius: 6px;
+        flex-grow: 1; /* Giá trị sẽ lấp đầy phần còn lại */
+    }
+</style>
+
+<div class="info-card">
+    <h2>THÔNG TIN SINH VIÊN</h2>
+
+    <div class="info-row">
+        <span class="info-label">Mã sinh viên:</span>
+        <span class="info-value">@maSV</span>
+    </div>
+
+    <div class="info-row">
+        <span class="info-label">Họ tên:</span>
+        <span class="info-value">@hoTenSV</span>
+    </div>
+
+    <div class="info-row">
+        <span class="info-label">Lớp:</span>
+        <span class="info-value">@lop</span>
+    </div>
+
+    <div class="info-row">
+        <span class="info-label">Ngày kiểm tra:</span>
+        <span class="info-value">@DateTime.Now.ToString("dd/MM/yyyy")</span>
+    </div>
+</div>

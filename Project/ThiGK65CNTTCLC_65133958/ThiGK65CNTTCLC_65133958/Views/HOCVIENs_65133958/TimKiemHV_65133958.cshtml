@@ -1,0 +1,262 @@
+﻿@model PagedList.IPagedList<ThiGK65CNTTCLC_65133958.Models.HOCVIEN>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Tìm kiếm Học viên";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    int stt = Model.FirstItemOnPage;
+}
+
+<style>
+    .search-card {
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: var(--shadow);
+        padding: 25px;
+        margin-bottom: 25px;
+        margin-top: 20px;
+    }
+
+    .search-form {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+
+        .search-form label {
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .search-form .form-control {
+            width: 200px;
+            padding: 8px 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+
+    .btn-search {
+        background: var(--primary);
+        color: #fff;
+        padding: 9px 20px;
+        border: none;
+        border-radius: 8px;
+        font-size: 1rem;
+        cursor: pointer;
+    }
+
+    .btn-reset {
+        background: #6c757d;
+        color: #fff;
+        padding: 9px 20px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-size: 1rem;
+    }
+
+        .btn-reset:hover {
+            color: #fff;
+            background: #5a6268;
+        }
+
+    .search-message {
+        text-align: center;
+        font-size: 1.2rem;
+        font-weight: 500;
+        color: #e74a3b;
+        padding: 20px 0;
+    }
+
+    .table-wrapper {
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: var(--shadow);
+        padding: 25px;
+        overflow-x: auto;
+    }
+
+    .table-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+        .table-header h2 {
+            margin: 0;
+            color: var(--bg-dark);
+        }
+
+    .styled-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.95rem;
+    }
+
+        .styled-table thead th {
+            background: #f5f7fa;
+            color: #555;
+            font-weight: 600;
+            text-align: left;
+            padding: 15px 12px;
+            border-bottom: 2px solid #eee;
+        }
+
+        .styled-table tbody tr {
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+            .styled-table tbody tr:last-child {
+                border-bottom: none;
+            }
+
+        .styled-table tbody td {
+            padding: 15px 12px;
+            vertical-align: middle;
+        }
+
+    .btn-action {
+        color: #fff;
+        padding: 6px 12px;
+        border-radius: 6px;
+        text-decoration: none;
+        font-size: 0.9rem;
+        margin-right: 5px;
+        white-space: nowrap;
+    }
+
+    .btn-details {
+        background: #28a745;
+        color: #fff;
+    }
+
+        .btn-details:hover {
+            background: #218838;
+            color: #fff;
+        }
+
+    .pagination-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 25px;
+    }
+
+        .pagination-container .pagination {
+            display: flex;
+            list-style: none;
+            padding: 0;
+        }
+
+            .pagination-container .pagination li {
+                margin: 0 3px;
+            }
+
+                .pagination-container .pagination li a,
+                .pagination-container .pagination li span {
+                    display: block;
+                    padding: 8px 14px;
+                    border: 1px solid #ddd;
+                    border-radius: 6px;
+                    color: var(--primary);
+                    text-decoration: none;
+                }
+
+                .pagination-container .pagination li.active span {
+                    background: var(--primary);
+                    color: #fff;
+                    border-color: var(--primary);
+                }
+</style>
+
+<div class="search-card">
+    @using (Html.BeginForm("TimKiemHV_65133958", "HOCVIENs_65133958", FormMethod.Get, new { @class = "search-form" }))
+    {
+        <label for="maHV">Mã học viên:</label>
+        <input type="text" name="maHV" id="maHV" value="@ViewBag.MaHVSearch" class="form-control" />
+
+        <label for="tenHV">Tên học viên:</label>
+        <input type="text" name="tenHV" id="tenHV" value="@ViewBag.TenHVSearch" class="form-control" />
+
+        <input type="submit" value="Tìm kiếm" class="btn-search" />
+
+        @Html.ActionLink("Nhập mới", "TimKiemHV_65133958", "HOCVIENs_65133958", new { reset = "true" }, new { @class = "btn-reset" })
+    }
+</div>
+
+<div class="table-wrapper">
+    <div class="table-header">
+        <h2>DANH SÁCH HỌC VIÊN TÌM THẤY</h2>
+    </div>
+
+    @if (ViewBag.Message != null)
+    {
+        <div class="search-message">
+            @ViewBag.Message
+        </div>
+    }
+
+    <table class="styled-table">
+        <thead>
+            <tr>
+                <th>STT</th>
+                <th>Mã HV</th>
+                <th>Họ học viên</th>
+                <th>Tên học viên</th>
+                <th>Ảnh đại diện</th>
+                <th>Ngày sinh</th>
+                <th>Giới tính</th>
+                <th>Email</th>
+                <th>Địa chỉ</th>
+                <th>Đối tượng</th>
+                <th>Chức năng</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@(stt++)</td>
+                    <td>@Html.DisplayFor(modelItem => item.MaHV)</td>
+                    <td>@Html.DisplayFor(modelItem => item.HoHV)</td>
+                    <td>@Html.DisplayFor(modelItem => item.TenHV)</td>
+                    <td>
+                        @if (!string.IsNullOrEmpty(item.AnhDaiDien))
+                        {
+                            <img src="@Url.Content("~/Uploads/Images/" + item.AnhDaiDien)"
+                                 alt="Ảnh đại diện"
+                                 style="width: 100px; height: auto; border-radius: 8px; object-fit: cover;" />
+                        }
+                        else
+                        {
+                            <span>(Không có ảnh)</span>
+                        }
+                    </td>
+                    <td>
+                        @(item.NgaySinh.HasValue ? item.NgaySinh.Value.ToString("dd/MM/yyyy") : "")
+                    </td>
+                    <td>
+                        @(item.GioiTinh == true ? "Nam" : "Nữ")
+                    </td>
+                    <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                    <td>@Html.DisplayFor(modelItem => item.DiaChi)</td>
+                    <td>@Html.DisplayFor(modelItem => item.DOITUONG.TenDoiTuong)</td>
+                    <td>
+                        @Html.ActionLink("Xem chi tiết", "Details_65133958", new { id = item.MaHV }, new { @class = "btn-action btn-details" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="pagination-container">
+        @Html.PagedListPager(Model, page => Url.Action("TimKiemHV_65133958",
+                 new { page, maHV = ViewBag.MaHVSearch, tenHV = ViewBag.TenHVSearch, reset = ViewBag.ResetSearch }),
+                 new PagedListRenderOptions
+                 {
+                     LiElementClasses = new[] { "page-item" },
+                     DisplayPageCountAndCurrentLocation = false,
+                     DisplayEllipsesWhenNotShowingAllPageNumbers = false
+                 })
+    </div>
+</div>

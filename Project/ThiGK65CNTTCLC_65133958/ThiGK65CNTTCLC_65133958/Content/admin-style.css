@@ -1,0 +1,293 @@
+﻿/* Import Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* Biến màu (Color Variables) */
+:root {
+    --bg-dark: #2a2d3e;
+    --bg-dark-light: #35394e;
+    --bg-light: #f5f7fa;
+    --primary: #4e73df;
+    --primary-hover: #3a58b9;
+    --text-light: #e0e0e0;
+    --text-dark: #333;
+    --border-color: #e0e0e0;
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* Reset cơ bản */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: var(--bg-light);
+    display: flex;
+    overflow-x: hidden;
+}
+
+/* 1. THANH SIDEBAR */
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 260px;
+    background: var(--bg-dark);
+    color: var(--text-light);
+    padding: 10px 14px;
+    z-index: 100;
+    transition: all 0.3s ease;
+}
+
+    /* Trạng thái thu gọn */
+    .sidebar.collapsed {
+        width: 80px;
+    }
+
+    .sidebar .logo-details {
+        height: 60px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        padding: 0 10px;
+    }
+
+    .sidebar .logo-icon {
+        font-size: 28px;
+        min-width: 50px;
+        text-align: center;
+        color: var(--primary);
+    }
+
+    .sidebar .logo-name {
+        font-size: 22px;
+        font-weight: 600;
+        opacity: 1;
+        transition: opacity 0.2s ease;
+    }
+
+    .sidebar.collapsed .logo-name {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .sidebar .nav-links {
+        height: calc(100% - 140px);
+        padding-top: 20px;
+        list-style: none;
+        overflow: auto;
+    }
+
+        .sidebar .nav-links::-webkit-scrollbar {
+            display: none; /* Ẩn thanh cuộn */
+        }
+
+        .sidebar .nav-links li {
+            margin-bottom: 8px;
+        }
+
+        .sidebar .nav-links a {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--text-light);
+            padding: 12px 10px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+            .sidebar .nav-links a:hover,
+            .sidebar .nav-links a.active {
+                background: var(--primary);
+                color: #fff;
+            }
+
+        .sidebar .nav-links i {
+            font-size: 18px;
+            min-width: 50px;
+            text-align: center;
+        }
+
+    .sidebar .link-name {
+        opacity: 1;
+        transition: opacity 0.2s ease;
+    }
+
+    .sidebar.collapsed .link-name {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    /* Phần Profile/Logout ở cuối Sidebar */
+    .sidebar .profile-details {
+        position: absolute;
+        bottom: 0;
+        width: calc(100% - 28px); /* 100% - padding (14px * 2) */
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: var(--bg-dark-light);
+        padding: 12px;
+        border-radius: 8px;
+        margin-bottom: 10px;
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+
+    .sidebar.collapsed .profile-details {
+        background: transparent;
+        justify-content: center;
+    }
+
+    .sidebar .profile-details .profile-content {
+        display: flex;
+        align-items: center;
+    }
+
+    .sidebar .profile-details i {
+        font-size: 22px;
+        min-width: 50px;
+        text-align: center;
+    }
+
+    .sidebar.collapsed .profile-details i {
+        min-width: unset;
+        padding: 10px;
+        background: var(--bg-dark-light);
+        border-radius: 8px;
+    }
+
+    .sidebar .profile-name {
+        font-weight: 500;
+        font-size: 15px;
+        white-space: nowrap;
+        opacity: 1;
+        transition: opacity 0.2s ease;
+    }
+
+        .sidebar .profile-name .user {
+            font-size: 12px;
+            color: #ccc;
+        }
+
+    .sidebar.collapsed .profile-name {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+
+/* 2. NỘI DUNG CHÍNH (MAIN CONTENT) */
+.main-content {
+    position: relative;
+    width: calc(100% - 260px);
+    left: 260px;
+    min-height: 100vh;
+    transition: all 0.3s ease;
+}
+
+.sidebar.collapsed ~ .main-content {
+    width: calc(100% - 80px);
+    left: 80px;
+}
+
+/* 2.1. TOPBAR */
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 25px;
+    background: #fff;
+    box-shadow: var(--shadow);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+}
+
+    .topbar .sidebar-toggle {
+        font-size: 24px;
+        color: var(--text-dark);
+        cursor: pointer;
+    }
+
+    .topbar .search-box .input-group {
+        position: relative;
+    }
+
+        .topbar .search-box .input-group input {
+            width: 300px;
+            height: 40px;
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding-left: 40px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .topbar .search-box .input-group i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #aaa;
+        }
+
+    .topbar .user-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        font-size: 15px;
+        font-weight: 500;
+    }
+
+        .topbar .user-wrapper i {
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+/* 2.2. VÙNG NỘI DUNG CHÍNH */
+.content-wrapper {
+    padding: 25px;
+    background: var(--bg-light);
+    min-height: calc(100vh - 145px); /* 100vh - topbar - footer */
+}
+
+/* 2.3. FOOTER */
+.footer {
+    padding: 20px 25px;
+    text-align: center;
+    font-size: 14px;
+    color: #888;
+    background: #fff;
+    border-top: 1px solid var(--border-color);
+}
+
+/* 3. RESPONSIVE (CHO ĐIỆN THOẠI) */
+@media (max-width: 992px) {
+    .topbar .search-box {
+        display: none; /* Ẩn ô tìm kiếm trên tablet */
+    }
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        left: -260px; /* Ẩn sidebar */
+    }
+
+        /* Lớp 'active' sẽ được JS thêm vào khi nhấn nút toggle */
+        .sidebar.active {
+            left: 0;
+            width: 260px;
+        }
+
+    .main-content {
+        width: 100%;
+        left: 0;
+    }
+
+    .sidebar.active ~ .main-content {
+        /* Không làm gì cả, giữ nguyên 100% */
+    }
+}

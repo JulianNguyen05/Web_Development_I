@@ -1,0 +1,41 @@
+﻿@model IEnumerable<OnThiGK.Models.SINHVIEN>
+
+@{
+    ViewBag.Title = "Danh sách sinh viên";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+
+    var grid = new WebGrid(Model, canPage: true, defaultSort: "TenSV", rowsPerPage: 5);
+}
+
+<div class="container mt-3">
+    <h2>Danh sách sinh viên</h2>
+
+    @grid.GetHtml(
+    tableStyle: "table table-bordered table-hover",
+    footerStyle: "grid-footer",
+    fillEmptyRows: true,
+    mode: WebGridPagerModes.Numeric,
+    alternatingRowStyle: "table-secondary",
+    columns: new[]
+    {
+        grid.Column(header: "STT", format: (item) => item.WebGrid.Rows.IndexOf(item) + 1 + (grid.PageIndex * grid.RowsPerPage)),
+        grid.Column("MaSV", header: "Mã sinh viên"),
+        grid.Column("HoSV", header: "Họ sinh viên"),
+        grid.Column("TenSV", header: "Tên sinh viên"),
+        grid.Column("GioiTinh", header: "Giới tính", format: (item) => item.GioiTinh == true ? "Nam" : "Nữ"),
+        grid.Column("NgaySinh", header: "Ngày sinh", format: (item) => string.Format("{0:dd/MM/yyyy}", item.NgaySinh)),
+        grid.Column("AnhSV", header: "Ảnh sinh viên", format: (item) =>
+            new HtmlString($"<img src='/images/{item.AnhSV}' alt='Ảnh SV' width='60' height='60' />")),
+        grid.Column("DiaChi", header: "Địa chỉ"),
+        grid.Column("Lop.TenLop", header: "Lớp"),
+        grid.Column(header: "Chức năng", format: (item) =>
+            new HtmlString(
+                "<a href='" + Url.Action("Details", "SinhViens", new { id = item.MaSV }) + "' class='btn btn-info btn-sm'>Xem</a> " +
+                "<a href='" + Url.Action("Edit", "SinhViens", new { id = item.MaSV }) + "' class='btn btn-warning btn-sm'>Sửa</a> " +
+                "<a href='" + Url.Action("Delete", "SinhViens", new { id = item.MaSV }) + "' class='btn btn-danger btn-sm' onclick='return confirm(\"Bạn có chắc muốn xóa?\")'>Xóa</a>"
+            )
+        )
+    }
+)
+
+</div>

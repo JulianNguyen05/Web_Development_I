@@ -1,0 +1,38 @@
+﻿@model BaiTap5_65133958.Models.MailInfo
+
+@{
+    ViewBag.Title = "Gửi Email";
+    Layout = "~/Views/Shared/_LayoutAdmin_65133958.cshtml";
+}
+
+<h3>CHỨC NĂNG GỬI EMAIL</h3>
+
+@using (Html.BeginForm("SendMail", "Home_65133958", FormMethod.Post))
+{
+    <table cellpadding="5">
+        <tr>
+            <td>Gửi từ email:</td>
+            <td>@Html.TextBoxFor(m => m.From, new { type = "email", required = "required" })</td>
+        </tr>
+        <tr>
+            <td>Mật khẩu:</td>
+            <td>@Html.PasswordFor(m => m.Password, new { required = "required" })</td>
+        </tr>
+        <tr>
+            <td>Gửi đến email:</td>
+            <td>@Html.TextBoxFor(m => m.To, new { type = "email", required = "required" })</td>
+        </tr>
+        <tr>
+            <td>Tiêu đề:</td>
+            <td>@Html.TextBoxFor(m => m.Subject)</td>
+        </tr>
+        <tr>
+            <td valign="top">Nội dung:</td>
+            <td>@Html.TextAreaFor(m => m.Body, new { rows = 5, cols = 40 })</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Gửi email" /></td>
+        </tr>
+    </table>
+}
